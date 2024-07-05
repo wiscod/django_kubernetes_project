@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -88,7 +88,7 @@ DB_PORT = os.environ.get("POSTGRES_PORT")
 DB_IS_AVAIL = all([
     DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST, DB_PORT
 ])
-
+POSTGRES_READY = str(os.environ.get('POSTGRES_READY')) == "1"
 
 if DB_IS_AVAIL and POSTGRES_READY:
     DATABASES = {
