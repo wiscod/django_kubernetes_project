@@ -1,6 +1,7 @@
 #!/bin/bash
 
-APP_PORT=${APP_PORT:-8000}
+APP_PORT=${PORT:-8000} # application port
+
 cd /app/
-/opt/venv/bin/python manage.py migrate --noinput
-/opt/venv/bin/gunicorn --worker-tmp-dir /dev/shm dango_k8s.wsgi:application --bind "0.0.0.0:${APP_PORT}"
+# /opt/venv/bin/python manage.py migrate --noinput
+/opt/venv/bin/gunicorn --worker-tmp-dir /dev/shm django_k8s.wsgi:application --bind "0.0.0.0:${APP_PORT}"

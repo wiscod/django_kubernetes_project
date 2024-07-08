@@ -1,9 +1,16 @@
 FROM python:3.10.12-slim-bullseye
 
 COPY . /app
+
 WORKDIR /app
+#-> cd /app/
 
 RUN python3 -m venv /opt/venv
-RUN /opt/venv/bin/pip install pip--upgrade pip && /opt/venv/bin/pip install -r requirements.txt && chmod +x entrypoint.sh
+# create venv in /opt/venv
+
+RUN /opt/venv/bin/pip install pip--upgrade pip && \
+    /opt/venv/bin/pip install -r requirements.txt && \
+    chmod +x entrypoint.sh
+# exec pip from /opt/venv
 
 CMD ["/app/entrypoint.sh"]

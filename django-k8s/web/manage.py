@@ -3,6 +3,8 @@
 import os
 import sys
 import dotenv
+import django_k8s
+
 
 def main():
     """Run administrative tasks."""
@@ -19,5 +21,5 @@ def main():
 
 
 if __name__ == '__main__':
-    dotenv.read_dotenv() 
+    dotenv.read_dotenv()
     main()
