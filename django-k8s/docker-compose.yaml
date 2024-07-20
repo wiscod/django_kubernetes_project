@@ -1,48 +1,55 @@
 
 version: "3.9"
 services:
-  web:
-    # depends_on:
-    #   - postgres_db
-    build:
-      context: ./web
-      dockerfile: DockerFile
-    image: django-k8s:v5
-    environment:
-      - PORT=8020
-    env_file:
-      - web/.env
-    ports:
-      - "8001:8020"
+  # web:
+  #   depends_on:
+  #     - postgres_db
+  #   build:
+  #     context: ./web
+  #     dockerfile: DockerFile
+  #   image: django-k8s:v1
+  #   environment:
+  #     - PORT=8020
+  #   env_file:
+  #     - web/.env
+  #   ports:
+  #     - "8001:8020"
   #   command: sh -c "chmod +x /app/migrate.sh && sh /app/migrate.sh && /app/entrypoint.sh"
   #   volumes:
   #      - staticfiles:/app/staticfiles/
-  # postgres_db:
-  #   image: postgres
-  #   expose:
-  #     - 5434
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data/
+  postgres_db:
+    image: postgres
+    restart: always
+    command: -p 5434
+    expose:
+      - 5434
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - web/.env
+    ports:
+      - "5434:5434"
 #     restart: always
-#     command: -p 5434
-#     env_file:
-#       - web/.env
-#     ports:
-#       - "5434:5434"
-#   redis_db:
-#     image: redis
-#     restart: always
-#     expose:
-#       - 6388
-#     ports:
-#       - "6388:6388"
-#     volumes:
-#         - redis_data:/data
-#     entrypoint: redis-server --appendonly yes --port 6388
+  redis_db:
+    image: redis
+    restart: always
+    expose:
+      - 6388
+    ports:
+      - "6388:6388"
+    volumes:
+        - redis_data:/data
+    entrypoint: redis-server --appendonly yes --port 6388
 
-
-# volumes:
+volumes:
+  postgres_data:
+  redis_data: 
 #   # staticfiles:
 #   #     external: true
-#   postgres_data:
-#   redis_data: 
+
+
+#Actes 2:5
+#Actes 1:12-14
+# Pour aller au siège, il faut te préparer à recevoir le saint-esprit
+# Regarde et voies ce qui peut t'empêcher de recevoir le Saint-Esprit
+# Désire ce remplissage, et demande à Dieu de t'aider à te débarasser de ces choses
